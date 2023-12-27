@@ -4,6 +4,7 @@ import { CRow, CCol, CCard } from "@coreui/react";
 
 import appConfig from "../../appconfig/appconfig";
 import Search from "./search";
+import Countdown from "./countdown";
 
 function searching() {
 	return (
@@ -18,6 +19,9 @@ function searching() {
 							border: "none",
 						}}>
 						<div className='slot_container'>
+							<div className='slot_timer'>
+								<Countdown />
+							</div>
 							<div className='column_auther'>
 								<div className='avatar_auther_column'>
 									<div className='avatar_auther'>

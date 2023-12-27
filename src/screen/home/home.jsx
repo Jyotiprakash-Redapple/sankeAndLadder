@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { CRow, CCol, CContainer, CCard, CModal } from "@coreui/react";
+import { CRow, CCol, CContainer, CCard } from "@coreui/react";
 import { useAppContext } from "../../context/Provider";
+import { updateGameMode, newGameInitAi } from "../../reducer/move";
+import { gameMode } from "../../reducer/constant";
 function home() {
-	const [visible, setVisible] = useState(false);
+	const [timer, setTimer] = useState("");
 	const navigate = useNavigate();
 
-	const { appState } = useAppContext();
+	const { appState, dispatch } = useAppContext();
 
 	const handelRandomMatch = () => {
 		appState.socket.onRendomMatch();
@@ -18,65 +20,55 @@ function home() {
 		navigate(`/play-game-ai`, {
 			replace: true,
 		});
+		dispatch(updateGameMode(gameMode.offline));
+		dispatch(newGameInitAi());
 	};
 	return (
 		<CContainer className='home_container' fluid>
 			<div className='home_wrapper'>
-				<CRow className='justify-content-center'>
-					<CCol xs='12'>
-						<CCard
-							style={{
-								height: "250px",
-								display: "flex",
-								alignItems: "center",
-								justifyContent: "center",
-								backgroundColor: "transparent",
-								border: "none",
-								outline: "none",
-							}}>
-							<div className='play_with_game'>{`PLAY  VS`}</div>
-						</CCard>
-					</CCol>
-					<CCol xs='12'>
-						<CCard
-							style={{
-								height: "250px",
-								backgroundColor: "transparent",
-								border: "none",
-								outline: "none",
-							}}>
-							<CRow
-								className='justify-content-around'
+				<div className='play_container'>
+					{" "}
+					<CRow className='justify-content-center'>
+						<CCol xs='12'>
+							<CCard
 								style={{
-									margin: 0,
+									height: "250px",
+									display: "flex",
+									alignItems: "center",
+									justifyContent: "center",
+									backgroundColor: "transparent",
+									border: "none",
+									outline: "none",
 								}}>
-								<CCol xs='4'>
-									<button className='play_start_btn' onClick={handelRandomMatch}>
-										<span>Player</span>
-									</button>
-								</CCol>
-								<CCol xs='4'>
-									<button className='play_start_btn' onClick={() => setVisible(true)}>
-										<span>AI</span>
-									</button>
-								</CCol>
-							</CRow>
-						</CCard>
-					</CCol>
-				</CRow>
-			</div>
-			<CModal
-				alignment='center'
-				visible={visible}
-				onClose={() => setVisible(false)}
-				aria-labelledby='VerticallyCenteredExample'>
-				<div class='comming_soon_wrapper'>
-					<h1>
-						coming soon<span class='comming_soon_dot'>.</span>
-					</h1>
-					<p>we are working hard to finish developement of Player vs AI page</p>
+								<div className='play_with_game'>{`PLAY  VS`}</div>
+							</CCard>
+						</CCol>
+						<CCol xs='12'>
+							<CCard
+								style={{
+									height: "250px",
+									backgroundColor: "transparent",
+									border: "none",
+									outline: "none",
+									marginBlock: "30px",
+								}}>
+								<CRow className='justify-content-around'>
+									<CCol xs='4'>
+										<button className='play_start_btn' onClick={handelRandomMatch}>
+											<span>Player</span>
+										</button>
+									</CCol>
+									<CCol xs='4'>
+										<button className='play_start_btn' onClick={handelPlayWithAi}>
+											<span>AI</span>
+										</button>
+									</CCol>
+								</CRow>
+							</CCard>
+						</CCol>
+					</CRow>
 				</div>
-			</CModal>
+			</div>
 		</CContainer>
 	);
 }

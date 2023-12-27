@@ -16,24 +16,6 @@ import Avatar13 from "../assets/app/search_avatar/avatar13.jpeg";
 import Avatar14 from "../assets/app/search_avatar/avatar14.jpg";
 import Avatar15 from "../assets/app/search_avatar/avatar15.jpg";
 
-import wp from "../assets/wp.png";
-import wb from "../assets/wb.png";
-import wk from "../assets/wk.png";
-import wn from "../assets/wn.png";
-import wr from "../assets/wr.png";
-import wq from "../assets/wq.png";
-
-import bp from "../assets/bp.png";
-import bb from "../assets/bb.png";
-import bk from "../assets/bk.png";
-import bn from "../assets/bn.png";
-import br from "../assets/br.png";
-import bq from "../assets/bq.png";
-appConfig.socketAuthKey =
-	"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJnYW1lX2lkIjoxMywiYmF0dGxlX2lkIjo4LCJ1c2VyX2lkIjo3LCJ1c2VyX25hbWUiOiJUZXN0MSIsInByb2ZpbGVfcGljdHVyZSI6Imh0dHA6Ly8zLjEzNy44Ni4yMzc6NTAwMC9wcm9maWxlX3Bob3RvLzE2ODYwMzI1NjkzMzYtanVzdGdhbWUucG5nIiwiYm90X2lkIjpudWxsLCJib3RfbmFtZSI6bnVsbCwiZW50cnlfZmVlIjoxMCwid2lubmluZ19hbW91bnQiOjE4LCJpYXQiOjE2OTAyNzE5OTksImV4cCI6MTcyMTgyOTU5OX0.n-9oUATGJ4ojYq2oXcRdSPbQqabXIlFw227dTdkx5TI";
-
-appConfig.socketURL = `http://16.163.81.210:5002/poolio?auth_token=${appConfig.socketAuthKey}`;
-
 appConfig.avatarArray = [
 	{ name: "Robot", avatar: Avatar1 },
 	{ name: "Pyhsot", avatar: Avatar2 },
@@ -51,29 +33,12 @@ appConfig.avatarArray = [
 	{ name: "Chiku", avatar: Avatar14 },
 	{ name: "Chiku", avatar: Avatar15 },
 ];
-
-appConfig.pices = {
-	wb,
-	wk,
-	wp,
-	wn,
-	wr,
-	wq,
-	bb,
-	bp,
-	bk,
-	bn,
-	br,
-	bq,
+appConfig.mode = "offline";
+appConfig.RESPONSIVE_TILE_SIZE = {
+	desktop: 50, // @media only screen and (min-width: 768px)
 };
+appConfig.DELAY_BETWEEN_STEPS = 10; // milliseconds
 
-appConfig.socket = {
-	emit: {
-		queueJoin: "queue-join",
-	},
-	listen: {
-		gameStart: "game-start",
-	},
-};
-appConfig.localStorageAuth = "cheesio_auth";
+appConfig.MAX_BOARD_POSITION = 100;
+appConfig.localStorageAuth = "auth_token";
 export default appConfig;

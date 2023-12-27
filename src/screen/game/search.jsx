@@ -10,7 +10,7 @@ function search() {
 	const navigate = useNavigate();
 
 	useEffect(() => {
-		if (appState.status === gameStatus.pending) {
+		if (!Object.keys(appState.position).length) {
 			const interval = setInterval(() => {
 				setAvatars([...avatars.slice(1), avatars[0]]); // Rotate avatars
 			}, 100);
@@ -26,7 +26,7 @@ function search() {
 	}, []);
 	return (
 		<>
-			{appState.socket_id ? (
+			{Object.keys(appState.position).length ? (
 				<div className='avatar_auther_column'>
 					<div className='avatar_auther'>
 						<img
@@ -37,12 +37,7 @@ function search() {
 							alt={``}
 						/>
 					</div>
-					<div className='auther_name'>
-						{
-							appConfig.avatarArray[Math.floor(Math.random() * appConfig.avatarArray.length)]
-								.name
-						}
-					</div>
+					<div className='auther_name'>{appState.position.player2.user_name}</div>
 				</div>
 			) : (
 				<div className='avatar-column'>
